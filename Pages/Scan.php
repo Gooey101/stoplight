@@ -78,18 +78,6 @@
         scanner.setInversionMode(event.target.value);
     });
 
-    // ####### File Scanning #######
-
-    fileSelector.addEventListener('change', event => {
-        const file = fileSelector.files[0];
-        if (!file) {
-            return;
-        }
-        QrScanner.scanImage(file)
-            .then(result => setResult(fileQrResult, result))
-            .catch(e => setResult(fileQrResult, e || 'No QR code found.'));
-    });
-
 </script>
 </body>
 </html>
