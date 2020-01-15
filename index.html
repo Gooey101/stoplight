@@ -49,6 +49,7 @@
 
 	<div id="fh5co-hero-wrapper">
 		<nav class="container navbar navbar-expand-lg main-navbar-nav navbar-light">
+			<a class="navbar-brand" href="">StopLite</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -56,23 +57,119 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-items-center ml-auto mr-auto">
 					<li class="nav-item active">
+						<a class="nav-link" href="#">Scan <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="$('#fh5co-features').goTo();return false;">FAQs</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="$('#fh5co-reviews').goTo();return false;"> Legal Notices</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="#"  onclick="$('#fh5co-download').goTo();return false;"> Education</a>
 					</li>
 				</ul>
+				<!--<div class="social-icons-header">
 					<a href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
 					<a href="https://freehtml5.co"><i class="fab fa-instagram"></i></a>
 					<a href="https://www.twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
+				</div>-->
 			</div>
 		</nav>
 
 		<div class="container fh5co-hero-inner">
+			<h1 class="animated fadeIn wow" data-wow-delay="0.4s"> Get started!</h1>
+			<!--<p class="animated fadeIn wow" data-wow-delay="0.67s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et voluptates, aliquid soluta distinctio dolorum tenetur. </p>-->
+			<button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s" onclick="$('#fh5co-download').goTo();return false;">Scan</button>
+			<!--<button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s" onclick="$('#fh5co-features').goTo();return false;">Features</button>
+			<img class="fh5co-hero-smartphone animated fadeInRight wow" data-wow-delay="1s" src="img/phone-image.png" alt="Smartphone">-->
 		</div>
 
+		<style>
+		    canvas {
+		        display: none;
+		    }
+		    hr {
+		        margin-top: 32px;
+		    }
+		    input[type="file"] {
+		        display: block;
+		        margin-bottom: 16px;
+		    }
+		    div {
+		        margin-bottom: 16px;
+		    }
+		</style>
+		<h1>Scan from WebCam:</h1>
+		<div>
+		    <b>Device has camera: </b>
+		    <span id="cam-has-camera"></span>
+		    <br>
+		    <video muted playsinline id="qr-video"></video>
+		</div>
+		<div>
+		    <select id="inversion-mode-select">
+		        <option value="original">Scan original (dark QR code on bright background)</option>
+		        <option value="invert">Scan with inverted colors (bright QR code on dark background)</option>
+		        <option value="both">Scan both</option>
+		    </select>
+		    <br>
+		</div>
+		<b>Detected QR code: </b>
+		<span id="cam-qr-result">None</span>
+		<br>
+		<b>Last detected at: </b>
+		<span id="cam-qr-result-timestamp"></span>
+		<hr>
+
+		<h1>Scan from File:</h1>
+		<input type="file" id="file-selector">
+		<b>Detected QR code: </b>
+		<span id="file-qr-result">None</span>
+
+		<script type="module">
+		    import QrScanner from "../qr-scanner.min.js";
+		    QrScanner.WORKER_PATH = '../qr-scanner-worker.min.js';
+
+		    const video = document.getElementById('qr-video');
+		    const camHasCamera = document.getElementById('cam-has-camera');
+		    const camQrResult = document.getElementById('cam-qr-result');
+		    const camQrResultTimestamp = document.getElementById('cam-qr-result-timestamp');
+		    const fileSelector = document.getElementById('file-selector');
+		    const fileQrResult = document.getElementById('file-qr-result');
+
+		    function setResult(label, result) {
+		        label.textContent = result;
+		        camQrResultTimestamp.textContent = new Date().toString();
+		        label.style.color = 'teal';
+		        clearTimeout(label.highlightTimeout);
+		        label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+		    }
+
+		    // ####### Web Cam Scanning #######
+
+		    QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
+
+		    const scanner = new QrScanner(video, result => setResult(camQrResult, result));
+		    scanner.start();
+
+		    document.getElementById('inversion-mode-select').addEventListener('change', event => {
+		        scanner.setInversionMode(event.target.value);
+		    });
+
+		    // ####### File Scanning #######
+
+		    fileSelector.addEventListener('change', event => {
+		        const file = fileSelector.files[0];
+		        if (!file) {
+		            return;
+		        }
+		        QrScanner.scanImage(file)
+		            .then(result => setResult(fileQrResult, result))
+		            .catch(e => setResult(fileQrResult, e || 'No QR code found.'));
+		    });
+
+		</script>
 	</div> <!-- first section wrapper -->
 
 
@@ -88,12 +185,21 @@
 			<div class="row fh5co-advantages-grid-columns wow animated fadeIn" data-wow-delay="0.36s">
 
 				<div class="col-sm-4">
+					<img class="grid-image" src="https://static.thenounproject.com/png/2708487-200.png" alt="Icon-1">
+					<h1 class="grid-title">Stay Healthy</h1>
+					<!--<p class="grid-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cupiditate.</p>-->
 				</div>
 
 				<div class="col-sm-4">
+					<img class="grid-image" src="https://static.thenounproject.com/png/875955-200.png" alt="Icon-2">
+					<h1 class="grid-title">Stay Safe</h1>
+					<!--<p class="grid-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cupiditate.</p>-->
 				</div>
 
 				<div class="col-sm-4">
+					<img class="grid-image" src="https://static.thenounproject.com/png/1779341-200.png" alt="Icon-3">
+					<h1 class="grid-title">Have Fun</h1>
+					<!--<p class="grid-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cupiditate.</p>-->
 				</div>
 
 
@@ -106,6 +212,7 @@
 													  SLIDER
 		 ========================================================================================================== -->
 
+	<!--<div class="fh5co-slider-outer wow fadeIn" data-wow-delay="0.36s">
 		<h1>SIMPLE WIDGETS</h1>
 		<small>Drag and Drop</small>
 		<div class="container fh5co-slider-inner">
@@ -121,6 +228,7 @@
 			</div>
 
 		</div>
+	</div>-->
 
 
 	<!-- ==========================================================================================================
@@ -243,6 +351,7 @@
 
 			<div class="footer-three-grid wow fadeIn animated" data-wow-delay="0.66s">
 				<div class="column-1-3">
+					<h1>StopLite App</h1>
 				</div>
 				<div class="column-2-3">
 					<nav class="footer-nav">
@@ -259,11 +368,13 @@
 						<a href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
 						<a href="https://freehtml5.co"><i class="fab fa-instagram"></i></a>
 						<a href="https://www.twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
+					</div>-->
 				</div>
 			</div>
 
 			<span class="border-bottom-footer"></span>
 
+			<p class="copyright">&copy;2020 StopLite App. All rights reserved. </p>
 
 		</div>
 	</footer>
@@ -271,6 +382,7 @@
 
 
 
+</div> <!-- main page wrapper -->
 	
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
