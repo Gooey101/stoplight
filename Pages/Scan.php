@@ -17,9 +17,9 @@ include "../Functions/Header.php";
     }
    
 </style>
-<h1>Scan from WebCam:</h1>
+<h1>Scan QR code</h1>
 <div>
-    <b>Device has camera: </b>
+    <!--<b>Device has camera: </b>-->
     <span id="cam-has-camera"></span>
     <br>
     <video muted playsinline id="qr-video"></video>

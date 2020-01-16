@@ -3,9 +3,13 @@
 include "../Functions/Header.php";
 
 $user = $_SESSION['user']; 
+?>
+<div id="qrcode" align="center">
+<?php echo "<img src='https://api.qrserver.com/v1/create-qr-code/?data=" . $_SESSION['user'] . "&size=500x400'/>";
 
-echo "<img src='https://api.qrserver.com/v1/create-qr-code/?data=" . $_SESSION['user'] . "&size=100x100'/>";
-
+?>
+</div>
+<?php
 if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM encounters where Party2 = '$user' && Viewed = '1'")) !== 0 ){
 echo "hello";
 $Party1 = mysqli_query($conn,"SELECT Party1 FROM encounters where Party2 = '$user' && Viewed = '1'");
