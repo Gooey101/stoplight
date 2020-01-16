@@ -141,7 +141,7 @@
 		    function setResult(label, result) {
 		        label.textContent = result;
 		        camQrResultTimestamp.textContent = new Date().toString();
-		        label.style.color = 'teal';
+		        label.style.color = 'pink';
 		        clearTimeout(label.highlightTimeout);
 		        label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
 		    }
