@@ -1,24 +1,39 @@
-<section class="colorfulForm">
-    <label>Title</label>
-    <input type="text" id="title" value="Colorful popup" class="l2"/><br>
-    <label>Text</label>
-  <textarea id="myText" class="l2">My text example</textarea><br>
-    <label>Mode</label>
-    <select class="l2" id="mode">
-        <option value="">confirm</option>
-        <option value="alert">alert</option>
-    </select><br>
-    <label>Size</label>
-    <select class="l2" id="size">
-        <option value="p">small</option>
-        <option value="m">medium</option>
-        <option value="g">big</option>
-    </select><br>
-  <label>Color</label>
-  <button class="l1 blue">blue</button> 
-  <button class="l1 green">green</button> 
-  <button class="l1 red">red</button>  
-  <button class="l1 white" style="border: 1px solid #555; color: #555;">white</button>
-  <button class="l1 orange">orange</button> 
-  <button class="l1 purple">purple</button> 
-</section> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
+</head>
+<body>
+
+<h2>Alert Messages</h2>
+
+<p>Click on the "x" symbol to close the alert message.</p>
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+</div>
+
+</body>
+</html>
