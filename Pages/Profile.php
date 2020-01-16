@@ -5,7 +5,7 @@ include "../Functions/Header.php";
 $Party1 = $_SESSION['user'];
 $Party2 = $_GET['username'];
 
-$query = mysqli_query( $conn ,"select * from user where UK_ID = $Party2");
+$query = mysqli_query($conn ,"select * from user where UK_ID = $Party2");
 
 $store = mysqli_fetch_assoc($query);
 
