@@ -5,11 +5,14 @@ include "conn.php";
 $user = $_POST['username'];
 
 $query = mysqli_query( $conn ,"select * from user where UK_ID = $user");
+
 $store = mysqli_fetch_assoc($query);
 
 if ($store['UK_ID'] == $user) {
 	
+	session_id($user);
 	session_start();
+	echo session_id();
 
 	///login counter
 	
@@ -19,7 +22,6 @@ if ($store['UK_ID'] == $user) {
 				$_SESSION['Status'] = $store['Status'];
 				$_SESSION['Frequency'] = $store['Frequency'];
 
-				
 				header('location:../Pages/Home.php');
 
 				#$get_UID = mysqli_query($conn, "select id from user_index where username = '$user'");

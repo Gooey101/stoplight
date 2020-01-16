@@ -6,14 +6,10 @@
 //DC=AD, DC=NCCU, DC=EDU
 
 $server = "localhost";
-$user = "id12252208_work";
-$password = "12345";
-$DB = "id12252208_work";
+$user = "root";
+$password = "";
+$DB = "stoplite";
 
 $conn = mysqli_connect("$server", "$user", "$password", "$DB") or die("cannot connect");
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
 
 ?>

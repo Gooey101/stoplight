@@ -15,9 +15,7 @@ include "../Functions/Header.php";
         display: block;
         margin-bottom: 16px;
     }
-    div {
-        margin-bottom: 16px;
-    }
+   
 </style>
 <h1>Scan from WebCam:</h1>
 <div>
