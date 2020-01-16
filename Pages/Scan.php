@@ -39,11 +39,6 @@ include "../Functions/Header.php";
 <span id="cam-qr-result-timestamp"></span>
 <hr>
 
-<h1>Scan from File:</h1>
-<input type="file" id="file-selector">
-<b>Detected QR code: </b>
-<span id="file-qr-result">None</span>
-
 <script type="module">
     import QrScanner from "../qr-scanner.min.js";
     QrScanner.WORKER_PATH = '../qr-scanner-worker.min.js';
