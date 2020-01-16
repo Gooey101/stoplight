@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>QR Scanner Demo</title>
-</head>
-<body>
+<?php 
+
+include "../Functions/Header.php";
+
+?>
+
 <style>
     canvas {
         display: none;
@@ -64,7 +63,7 @@
         label.style.color = 'teal';
         clearTimeout(label.highlightTimeout);
         label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
-        window.location.replace(result);
+        window.location = 'Profile.php?username=' + result;
     }
 
     // ####### Web Cam Scanning #######
@@ -77,7 +76,6 @@
     document.getElementById('inversion-mode-select').addEventListener('change', event => {
         scanner.setInversionMode(event.target.value);
     });
-
 </script>
 </body>
 </html>
